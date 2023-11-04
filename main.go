@@ -10,9 +10,9 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	lambda "github.com/aws/aws-lambda-go/lambda"
-	"github.com/josetitic/gambituser/awsgo"
-	"github.com/josetitic/gambituser/db"
-	"github.com/josetitic/gambituser/models"
+	"github.com/josetitic/gambituser/tree/main/awsgo"
+	"github.com/josetitic/gambituser/tree/main/db"
+	"github.com/josetitic/gambituser/tree/main/models"
 
 )
 

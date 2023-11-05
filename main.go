@@ -52,6 +52,7 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 
 func ValidParameters() bool {
 	var getParameter bool
-	_, getParameter = os.LookupEnv("SecretName")
+	_, getParameter = os.LookupEnv("Secret Name")
+	fmt.Printf("Parameters", getParameter)
 	return getParameter
 }

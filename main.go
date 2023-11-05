@@ -1,20 +1,19 @@
 package main
 
 import (
-	"gambituser/db"
-	"gambituser/models"
 	"context"
 	"errors"
 	"fmt"
+	"gambituser/awsgo"
+	"gambituser/db"
+	"gambituser/models"
 	"os"
 
 	"github.com/aws/aws-lambda-go/events"
 	lambda "github.com/aws/aws-lambda-go/lambda"
-	"github.com/josetitic/gambituser/tree/main/awsgo"
+	/*"github.com/josetitic/gambituser/tree/main/awsgo"
 	"github.com/josetitic/gambituser/tree/main/db"
-	"github.com/josetitic/gambituser/tree/main/models"
-
-)
+	"github.com/josetitic/gambituser/tree/main/models"*/)
 
 func main() {
 	lambda.Start(LambdaExecution)
@@ -30,14 +29,14 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 
 	var dats models.SignUp
 
-	for row,att := range event.Request.UserAttributes {
+	for row, att := range event.Request.UserAttributes {
 		switch row {
 		case "email":
 			dats.UserEmail = att
-			fmt.Println("Email = "+dats.UserEmail)
+			fmt.Println("Email = " + dats.UserEmail)
 		case "sub":
 			dats.UserUUID = att
-			fmt.Println("Email = "+dats.UserUUID)
+			fmt.Println("Email = " + dats.UserUUID)
 		}
 	}
 
@@ -48,7 +47,7 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 
 	err = db.SignUp(dats)
 
-	return event,err
+	return event, err
 }
 
 func ValidParameters() bool {

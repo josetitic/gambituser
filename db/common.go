@@ -19,7 +19,7 @@ var Db *sql.DB
 func ReadSecret() error {
 
 	ModelSecret, err = secretm.GetSecret(os.Getenv("nameSecret"))
-
+	fmt.Println("Valores del Secreto ", ModelSecret)
 	return err
 }
 

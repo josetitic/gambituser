@@ -37,6 +37,8 @@ func DbConnect() error {
 	}
 
 	fmt.Println("Conexión exitosa de la BD")
+
+	return nil
 }
 
 func ConnStr(keys models.SecretRDSJson) string {
@@ -45,7 +47,7 @@ func ConnStr(keys models.SecretRDSJson) string {
 	authToken = keys.Password
 	dbEndpoint = keys.Host
 	dbName = "gambit"
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?allowCleartextPasswords=true", dbuser, authToken, dbEndpoint, dbName)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?allowCleartextPasswords=true", dbUser, authToken, dbEndpoint, dbName)
 	fmt.Println(dsn)
 	return dsn
 }

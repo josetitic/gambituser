@@ -16,20 +16,21 @@ var Db *sql.DB
 func ReadSecret() error {
 	fmt.Println("Va a leer el secreto ")
 	ModelSecret, err = secretm.GetSecret(os.Getenv("nameSecret"))
-	fmt.Println("Valores del Secreto ", ModelSecret)
 	return err
 }
 
 func DbConnect() error {
 	Db, err = sql.Open("mysql", ConnStr(ModelSecret))
+
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println("Ocurrió un error al conectarse a la BD: "+err.Error())
 		return err
 	}
 
 	err = Db.Ping()
+
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println("Ocurrió un error al conectarse al hacer ping a la BD: " +err.Error())
 		return err
 	}
 
@@ -45,6 +46,6 @@ func ConnStr(keys models.SecretRDSJson) string {
 	dbEndpoint = keys.Host
 	dbName = "gambit"
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?allowCleartextPasswords=true", dbUser, authToken, dbEndpoint, dbName)
-	fmt.Println(dsn)
+	fmt.Println("DSN: " +dsn)
 	return dsn
 }

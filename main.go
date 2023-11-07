@@ -22,16 +22,13 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 
 	fmt.Println("> Despues de StartAWS'")
 
-	if !ValidParameters() {
-		fmt.Println("Error en los parámetros en 'SecretName'")
-		err := errors.New("Error en los parámetros, debe enviar SecretName")
-		return event, err
-	}
-
-	fmt.Printf("entrando a models.SignUp")
+	fmt.Println("> Antes de  de models.SignUp")
 
 	var dats models.SignUp
 
+	fmt.Println("> Despues de  de models.SignUp'")
+
+	fmt.Println("> Antes  de  de db.ReadSecret")
 	err := db.ReadSecret()
 
 	fmt.Printf("resultado de ReadScret: ", err)
@@ -41,6 +38,16 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 	if err != nil {
 		fmt.Printf("Error al leer el secret", err)
 	}
+
+	if !ValidParameters() {
+		fmt.Println("Error en los parámetros en 'SecretName'")
+		err := errors.New("Error en los parámetros, debe enviar SecretName")
+		return event, err
+	}
+
+	fmt.Printf("entrando a models.SignUp")
+
+	
 
 	for row, att := range event.Request.UserAttributes {
 		switch row {

@@ -28,7 +28,7 @@ func GetSecret(nameSecret string) (models.SecretRDSJson, error) {
 
 	json.Unmarshal([]byte(*key.SecretString), &secretData)
 
-	fmt.Println(" > Lectura Secret OK " + nameSecret)
+	fmt.Println(" > Lectura Secret OK " )
 
 	return secretData, nil
 }

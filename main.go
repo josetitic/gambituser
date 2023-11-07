@@ -40,10 +40,8 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 		switch row {
 		case "email":
 			dats.UserEmail = att
-			fmt.Println("Email = " + dats.UserEmail)
 		case "sub":
 			dats.UserUUID = att
-			fmt.Println("Email = " + dats.UserUUID)
 		}
 	}
 
@@ -55,8 +53,7 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 
 func ValidParameters() bool {
 	var getParameter bool
-	fmt.Printf("variables list: ",os.Environ())
-
+	os.Environ()
 	_, getParameter = os.LookupEnv("nameSecret")
 	fmt.Printf("Parameters: ", getParameter)
 	return getParameter

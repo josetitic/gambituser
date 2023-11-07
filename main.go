@@ -11,9 +11,9 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	lambda "github.com/aws/aws-lambda-go/lambda"
-	/*"github.com/josetitic/gambituser/tree/main/awsgo"
-	"github.com/josetitic/gambituser/tree/main/db"
-	"github.com/josetitic/gambituser/tree/main/models"*/)
+	/*"github.com/josetitic/gambituser/awsgo"
+	"github.com/josetitic/gambituser/db"
+	"github.com/josetitic/gambituser/models"*/)
 
 func main() {
 	lambda.Start(LambdaExecution)
@@ -41,6 +41,10 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 	}
 
 	err := db.ReadSecret()
+	fmt.Printf("resultado de ReadScret: ", err)
+
+	fmt.Println("Email = " + dats.UserUUID)
+
 	if err != nil {
 		fmt.Printf("Error al leer el secret", err)
 	}
@@ -53,6 +57,6 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 func ValidParameters() bool {
 	var getParameter bool
 	_, getParameter = os.LookupEnv("Secret Name")
-	fmt.Printf("Parameters", getParameter)
+	fmt.Printf("Parameters: ", getParameter)
 	return getParameter
 }

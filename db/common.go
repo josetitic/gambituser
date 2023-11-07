@@ -21,7 +21,8 @@ func ReadSecret() error {
 
 func DbConnect() error {
 	Db, err = sql.Open("mysql", ConnStr(ModelSecret))
-
+	fmt.Println("> DB: ")
+	fmt.Println(Db)
 	if err != nil {
 		fmt.Println("Ocurrió un error al conectarse a la BD: "+err.Error())
 		return err

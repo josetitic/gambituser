@@ -5,19 +5,16 @@ import (
 	"fmt"
 	"os"
 
-	"gambituser/models"
-	"gambituser/secretm"
-
 	_ "github.com/go-sql-driver/mysql"
-	/*"github.com/josetitic/gambituser/tree/main/models"
-	"github.com/josetitic/gambituser/tree/main/secretm"*/)
+	"github.com/josetitic/gambituser/models"
+	"github.com/josetitic/gambituser/secretm")
 
 var ModelSecret models.SecretRDSJson
 var err error
 var Db *sql.DB
 
 func ReadSecret() error {
-
+	fmt.Println("Va a leer el secreto ")
 	ModelSecret, err = secretm.GetSecret(os.Getenv("nameSecret"))
 	fmt.Println("Valores del Secreto ", ModelSecret)
 	return err

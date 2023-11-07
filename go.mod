@@ -1,4 +1,4 @@
-module gambituser
+module github.com/josetitic/gambituser
 
 go 1.21.0
 

@@ -4,29 +4,33 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"gambituser/awsgo"
-	"gambituser/db"
-	"gambituser/models"
 	"os"
 
 	"github.com/aws/aws-lambda-go/events"
 	lambda "github.com/aws/aws-lambda-go/lambda"
-	/*"github.com/josetitic/gambituser/awsgo"
+	"github.com/josetitic/gambituser/awsgo"
 	"github.com/josetitic/gambituser/db"
-	"github.com/josetitic/gambituser/models"*/)
+	"github.com/josetitic/gambituser/models")
 
 func main() {
 	lambda.Start(LambdaExecution)
 }
 
 func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPostConfirmation) (events.CognitoEventUserPoolsPostConfirmation, error) {
+	fmt.Println("> Antes de StartAWS'")
 	awsgo.StartAWS()
 
-	fmt.Printf("> entrando a models.SignUp")
+	fmt.Println("> Despues de StartAWS'")
+
+	if !ValidParameters() {
+		fmt.Println("Error en los parámetros en 'SecretName'")
+		err := errors.New("Error en los parámetros, debe enviar SecretName")
+		return event, err
+	}
+
+	fmt.Printf("entrando a models.SignUp")
 
 	var dats models.SignUp
-
-	fmt.Printf("> entrando a ReadSecret")
 
 	err := db.ReadSecret()
 
@@ -51,12 +55,6 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 
 
 	err = db.SignUp(dats)
-
-	if !ValidParameters() {
-		fmt.Println("Error en los parámetros en 'SecretName'")
-		err := errors.New("Error en los parámetros, debe enviar SecretName")
-		return event, err
-	}
 
 	return event, err
 }

@@ -4,13 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"gambituser/awsgo"
-	"gambituser/models"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
-	/*"github.com/josetitic/gambituser/awsgo"
-	"github.com/josetitic/gambituser/main/models"*/)
+	"github.com/josetitic/gambituser/awsgo"
+	"github.com/josetitic/gambituser/models")
 
 func GetSecret(nameSecret string) (models.SecretRDSJson, error) {
 	var secretData models.SecretRDSJson

@@ -3,12 +3,9 @@ package db
 import (
 	"fmt"
 
-	"gambituser/models"
-	"gambituser/tools"
-
 	_ "github.com/go-sql-driver/mysql"
-	/*"github.com/josetitic/gambituser/tree/main/models"
-	"github.com/josetitic/gambituser/tree/main/tools"*/)
+	"github.com/josetitic/gambituser/models"
+	"github.com/josetitic/gambituser/tools")
 
 func SignUp(sig models.SignUp) error {
 	fmt.Println("Comienza Registro")

@@ -22,7 +22,21 @@ func main() {
 func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPostConfirmation) (events.CognitoEventUserPoolsPostConfirmation, error) {
 	awsgo.StartAWS()
 
+	fmt.Printf("> entrando a models.SignUp")
+
 	var dats models.SignUp
+
+	fmt.Printf("> entrando a ReadSecret")
+
+	err := db.ReadSecret()
+
+	fmt.Printf("resultado de ReadScret: ", err)
+
+	fmt.Println("Email = " + dats.UserUUID)
+
+	if err != nil {
+		fmt.Printf("Error al leer el secret", err)
+	}
 
 	for row, att := range event.Request.UserAttributes {
 		switch row {
@@ -35,15 +49,6 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 		}
 	}
 
-	err := db.ReadSecret()
-	
-	fmt.Printf("resultado de ReadScret: ", err)
-
-	fmt.Println("Email = " + dats.UserUUID)
-
-	if err != nil {
-		fmt.Printf("Error al leer el secret", err)
-	}
 
 	err = db.SignUp(dats)
 

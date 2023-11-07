@@ -17,23 +17,12 @@ func main() {
 }
 
 func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPostConfirmation) (events.CognitoEventUserPoolsPostConfirmation, error) {
-	fmt.Println("> Antes de StartAWS'")
+
 	awsgo.StartAWS()
-
-	fmt.Println("> Despues de StartAWS'")
-
-	fmt.Println("> Antes de  de models.SignUp")
 
 	var dats models.SignUp
 
-	fmt.Println("> Despues de  de models.SignUp'")
-
-	fmt.Println("> Antes  de  de db.ReadSecret")
 	err := db.ReadSecret()
-
-	fmt.Printf("resultado de ReadScret: ", err)
-
-	fmt.Println("Email = " + dats.UserUUID)
 
 	if err != nil {
 		fmt.Printf("Error al leer el secret", err)
@@ -46,8 +35,6 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 	}
 
 	fmt.Printf("entrando a models.SignUp")
-
-	
 
 	for row, att := range event.Request.UserAttributes {
 		switch row {
@@ -68,7 +55,7 @@ func LambdaExecution(ctx context.Context, event events.CognitoEventUserPoolsPost
 
 func ValidParameters() bool {
 	var getParameter bool
-	_, getParameter = os.LookupEnv("SecretName")
+	_, getParameter = os.LookupEnv("nameSecret")
 	fmt.Printf("Parameters: ", getParameter)
 	return getParameter
 }
